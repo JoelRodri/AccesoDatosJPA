@@ -23,4 +23,4 @@
 
 
 # JavaDoc
-[Javadoc.html](https://xiaochaoy.github.io/WebJPA/)
+[Javadoc.html](https://joelrodri.github.io/AccesoDatosJPA/)
