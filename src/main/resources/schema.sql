@@ -1,6 +1,14 @@
-CREATE TABLE rol(rol varchar(20) primary key);
+CREATE TABLE escuderia(escuderia varchar(20) primary key);
 
-CREATE TABLE campeon(id smallint primary key GENERATED ALWAYS AS IDENTITY,
-                    nom varchar(20),
-                    rol varchar(20) references rol(rol),
-                    historia text);
+CREATE TABLE piloto(numero varchar(5) primary key GENERATED ALWAYS AS IDENTITY,
+                    nombre varchar(30),
+                    escuderia varchar (20) references escuderia(escuderia),
+                    pais varchar (20),
+                    podiums varchar (10),
+                    puntosTotales varchar (10),
+                    gpCompletados varchar (5),
+                    titulosMundiales varchar (5),
+                    mejorPos varchar (10),
+                    mejorClas varchar (5),
+                    fechaNacimiento varchar (20),
+                    nacionalidad varchar (30));

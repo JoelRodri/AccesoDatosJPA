@@ -1,19 +1,10 @@
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.*;
 
 import controller.*;
 import database.ConnectionFactory;
 import model.*;
-import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 import view.Menu;
 
 import javax.persistence.EntityManagerFactory;
@@ -21,7 +12,7 @@ import javax.persistence.Persistence;
 
 
 /**
- * Esta clase es la principal donde inicializas tu programa y muestra un menu
+ * Esta clase es la principal donde inicializas el programa y muestra un menu
  */
 public class Main {
 
@@ -48,8 +39,8 @@ public class Main {
 
         EntityManagerFactory entityManagerFactory = createEntityManagerFactory();
 
-        RolController rolController = new RolController(c, entityManagerFactory);
-        CampeonController campeonController = new CampeonController(c, entityManagerFactory);
+        EscuderiaController escuderiaController = new EscuderiaController(c, entityManagerFactory);
+        PilotoController pilotoController = new PilotoController(c, entityManagerFactory);
 
 
         Menu menu = new Menu();
@@ -58,73 +49,100 @@ public class Main {
         while (opcio > 0 && opcio < 14) {
             switch (opcio) {
                 case 1:
-                    List<Rol> roles = rolController.readRolFile("src/main/resources/lol.csv");
-                    for (Rol r : roles) {
+                    List<Escuderia> escuderias = escuderiaController.readEscuderiaFile("src/main/resources/f1.csv");
+                    for (Escuderia r : escuderias) {
                         try {
-                            rolController.addRol(r);
+                            escuderiaController.addEscuderia(r);
                         } catch (Exception e) {
                         }
                     }
 
-                    List<Campeon> campeons = campeonController.readCampeonFile("src/main/resources/lol.csv");
-                    for (Campeon campeon : campeons) {
-                        campeonController.addCampeon(campeon);
+                    List<Piloto> pilotos = pilotoController.readPilotoFile("src/main/resources/f1.csv");
+                    for (Piloto piloto : pilotos) {
+                        pilotoController.addPiloto(piloto);
                     }
                     break;
                 case 2:
-                    campeonController.showCampeonPorRol();
+                    pilotoController.showPilotoPorEscuderia();
                     break;
                 case 3:
-                    campeonController.showCampeonCon();
+                    pilotoController.showPilotoCon();
                     break;
                 case 4:
-                    campeonController.showCampeonPor();
+                    pilotoController.showPilotoPor();
                     break;
                 case 5:
-                    campeonController.modificarCampeon();
+                    pilotoController.modificarPiloto();
                     break;
                 case 6:
-                    rolController.modificarRol();
+                    escuderiaController.modificarEscuderia();
                     break;
                 case 7:
-                    campeonController.borrarCampeon();
+                    pilotoController.borrarPiloto();
                     break;
                 case 8:
-                    campeonController.borrarCampeonPorRol();
+                    pilotoController.borrarPilotoPorEscuderia();
                     break;
                 case 9:
                     System.out.println("----------------------");
-                    System.out.println("Crear Rol");
+                    System.out.println("Crear Escuderia");
                     System.out.println("----------------------");
 
-                    System.out.println("Rol:");
-                    String rol = sc.nextLine().toUpperCase(Locale.ROOT);
+                    System.out.println("Nombre:");
+                    String escuderia = sc.nextLine().toUpperCase(Locale.ROOT);
 
-                    rolController.addRol(new Rol(rol));
+                    escuderiaController.addEscuderia(new Escuderia(escuderia));
 
                     break;
                 case 10:
                     System.out.println("----------------------");
-                    System.out.println("Crear Campeon");
+                    System.out.println("Crear Piloto");
                     System.out.println("----------------------");
+
+                    System.out.println("Numero: ");
+                    String numero = sc.nextLine().toUpperCase(Locale.ROOT);
 
                     System.out.println("Nombre:");
                     String nom = sc.nextLine().toUpperCase(Locale.ROOT);
 
-                    System.out.println("Elige un rol:");
-                    String role = menu.RolMenu(c, entityManagerFactory).toUpperCase(Locale.ROOT);
+                    System.out.println("Elige una escuderia:");
+                    String escuderia2 = menu.EscuderiaMenu(c, entityManagerFactory).toUpperCase(Locale.ROOT);
 
-                    System.out.println("Historia:");
-                    String historia = sc.nextLine();
+                    System.out.println("Elije un pais: ");
+                    String pais = sc.nextLine().toUpperCase(Locale.ROOT);
 
-                    campeonController.addCampeon(new Campeon(nom, new Rol(role), historia));
+                    System.out.println("Podiums: ");
+                    String podiums = sc.nextLine();
+
+                    System.out.println("Puntos totales: ");
+                    String puntosTotales = sc.nextLine();
+
+                    System.out.println("gpCompletados: ");
+                    String gpCompletados = sc.nextLine();
+
+                    System.out.println("Titulos mundiales: ");
+                    String titulosMundiales = sc.nextLine();
+
+                    System.out.println("Mejor posición: ");
+                    String mejorPos = sc.nextLine();
+
+                    System.out.println("Mejor clasificación: ");
+                    String mejorClas = sc.nextLine();
+
+                    System.out.println("Fecha de nacimiento: ");
+                    String fechaNaci = sc.nextLine();
+
+                    System.out.println("Nacionalidad: ");
+                    String nacionalidad = sc.nextLine();
+
+                    pilotoController.addPiloto(new Piloto(numero, nom, new Escuderia(escuderia2), pais,podiums,puntosTotales,gpCompletados,titulosMundiales,mejorPos,mejorClas,fechaNaci,nacionalidad));
 
                     break;
                 case 11:
-                    campeonController.showCampeon();
+                    pilotoController.showPiloto();
                     break;
                 case 12:
-                    rolController.showRols();
+                    escuderiaController.showEscuderia();
                     break;
                 case 13:
                     System.exit(1);

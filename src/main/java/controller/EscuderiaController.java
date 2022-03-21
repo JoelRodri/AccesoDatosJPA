@@ -1,7 +1,7 @@
 package controller;
 
-import model.Campeon;
-import model.Rol;
+import model.Piloto;
+import model.Escuderia;
 import view.Menu;
 
 import javax.persistence.EntityManager;
@@ -13,13 +13,13 @@ import java.sql.Connection;
 import java.util.*;
 
 /**
- * Esta clase sirve para controlar la tabla rol situada en mi base de datos
+ * Esta clase sirve para controlar la tabla escuderia situada en la base de datos
  */
-public class RolController {
+public class EscuderiaController {
     private Connection connection;
     private EntityManagerFactory entityManagerFactory;
     Scanner sc;
-    List<Rol> roles ;
+    List<Escuderia> escuderias;
     Menu menu = new Menu();
 
     /**
@@ -27,81 +27,81 @@ public class RolController {
      * @param connection recibe la coneccion hacia postgres
      * @param entityManagerFactory recibe el entityManagerFactory
      */
-    public RolController(Connection connection, EntityManagerFactory entityManagerFactory) {
+    public EscuderiaController(Connection connection, EntityManagerFactory entityManagerFactory) {
         this.connection = connection;
         this.entityManagerFactory = entityManagerFactory;
         this.sc = new Scanner(System.in);
-        roles = new ArrayList<>();
+        escuderias = new ArrayList<>();
     }
 
     /**
      * Este metodo sirve para leer el fichero, lo mete en una lista y lo devuelve
      * @param file rebie la ruta del fichero
-     * @return devuelve una lista de Rol
+     * @return devuelve una lista de Escuderia
      * @throws IOException
      */
-    public List<Rol> readRolFile(String file) throws IOException {
+    public List<Escuderia> readEscuderiaFile(String file) throws IOException {
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         String linea = "";
 
         while((linea = br.readLine()) != null){
             List<String> listToken = getTokenList(linea, "\"");
-             roles.add(new Rol(listToken.get(2)));
+             escuderias.add(new Escuderia(listToken.get(4)));
         }
 
-        return roles;
+        return escuderias;
     }
 
     /**
-     * Para añadir rol
-     * @param rol
+     * Para añadir escuderia
+     * @param escuderia
      */
-    public void addRol(Rol rol) {
+    public void addEscuderia(Escuderia escuderia) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        em.persist(rol);
+        em.persist(escuderia);
         em.getTransaction().commit();
         em.close();
     }
 
     /**
-     * Este metodo sirve para mostrar roles
+     * Este metodo sirve para mostrar escuderias
      */
-    public void showRols(){
+    public void showEscuderia(){
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        List<Rol> result = em.createQuery("from Rol", Rol.class).getResultList();
-        for (Rol rol : result) {
-            System.out.println(rol.toString());
+        List<Escuderia> result = em.createQuery("from Escuderia", Escuderia.class).getResultList();
+        for (Escuderia escuderia : result) {
+            System.out.println(escuderia.toString());
         }
         em.getTransaction().commit();
         em.close();
     }
 
     /**
-     * Este metodo sirve para modificar el rol de los campeones
+     * Este metodo sirve para modificar la escuderia de los pilotos
      */
-    public void modificarRol(){
-        String rol = menu.RolMenu(connection,entityManagerFactory).toUpperCase(Locale.ROOT);
-        System.out.println("Escribe la primera letra del campeon que quieras modificar ?");
+    public void modificarEscuderia(){
+        String escuderia = menu.EscuderiaMenu(connection,entityManagerFactory).toUpperCase(Locale.ROOT);
+        System.out.println("Escribe la primera letra del piloto que quieras modificar ?");
         String letra = sc.nextLine().toUpperCase(Locale.ROOT);
-        String sql = "from Campeon where nom like '" + letra + "%'";
+        String sql = "from Piloto where nom like '" + letra + "%'";
 
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
 
-        List<Campeon> result = em.createQuery(sql, Campeon.class).getResultList();
-        for (Campeon campeon : result) {
-            campeon.setRol(new Rol(rol));
-            em.merge(campeon);
+        List<Piloto> result = em.createQuery(sql, Piloto.class).getResultList();
+        for (Piloto piloto : result) {
+            piloto.setEscuderia(new Escuderia(escuderia));
+            em.merge(piloto);
         }
         em.getTransaction().commit();
         em.close();
     }
 
     /**
-     * Este metodo sirve para dividir una frase en trozos depediendo del separador
+     * Este metodo sirve para dividir una frase depediendo del separador
      * @param string recibe una frase
      * @param delimiters recibe cual es el separador
      * @return devuelve un array de palabras separadas.

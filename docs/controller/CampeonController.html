@@ -72,13 +72,13 @@ loadScripts(document, 'script');</script>
 <h1 title="Class CampeonController" class="title">Class CampeonController</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">controller.CampeonController</div>
+<div class="inheritance">controller.PilotoController</div>
 </div>
 <section class="class-description" id="class-description">
 <hr>
 <div class="type-signature"><span class="modifiers">public class </span><span class="element-name type-name-label">CampeonController</span>
 <span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></span></div>
-<div class="block">Esta clase sirve para controlar la tabla campeon situada en mi base de datos</div>
+<div class="block">Esta clase sirve para controlar la tabla piloto situada en mi base de datos</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -110,14 +110,14 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addCampeon(model.Campeon)" class="member-name-link">addCampeon</a><wbr>(<a href="../model/Campeon.html" title="class in model">Campeon</a>&nbsp;campeon)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addCampeon(model.Campeon)" class="member-name-link">addCampeon</a><wbr>(<a href="../model/Campeon.html" title="class in model">Campeon</a>&nbsp;piloto)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Para añadir campeon</div>
+<div class="block">Para añadir piloto</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#borrarCampeon()" class="member-name-link">borrarCampeon</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Este metodo sirve para borrar un campeon</div>
+<div class="block">Este metodo sirve para borrar un piloto</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#borrarCampeonPorRol()" class="member-name-link">borrarCampeonPorRol</a>()</code></div>
@@ -127,7 +127,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#modificarCampeon()" class="member-name-link">modificarCampeon</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Este metodo sirve para modificar el nombre de un campeon</div>
+<div class="block">Este metodo sirve para modificar el nombre de un piloto</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../model/Campeon.html" title="class in model">Campeon</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#readCampeonFile(java.lang.String)" class="member-name-link">readCampeonFile</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;file)</code></div>
@@ -147,7 +147,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showCampeonNom()" class="member-name-link">showCampeonNom</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Este metodo sirve para mostrar las id y los nombres de campeon que hay</div>
+<div class="block">Este metodo sirve para mostrar las id y los nombres de piloto que hay</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#showCampeonPor()" class="member-name-link">showCampeonPor</a>()</code></div>
@@ -216,11 +216,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="addCampeon(model.Campeon)">
 <h3>addCampeon</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addCampeon</span><wbr><span class="parameters">(<a href="../model/Campeon.html" title="class in model">Campeon</a>&nbsp;campeon)</span></div>
-<div class="block">Para añadir campeon</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">addCampeon</span><wbr><span class="parameters">(<a href="../model/Campeon.html" title="class in model">Campeon</a>&nbsp;piloto)</span></div>
+<div class="block">Para añadir piloto</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>campeon</code> - recibe un campeon y lo añade</dd>
+<dd><code>piloto</code> - recibe un piloto y lo añade</dd>
 </dl>
 </section>
 </li>
@@ -256,21 +256,21 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="showCampeonNom()">
 <h3>showCampeonNom</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">showCampeonNom</span>()</div>
-<div class="block">Este metodo sirve para mostrar las id y los nombres de campeon que hay</div>
+<div class="block">Este metodo sirve para mostrar las id y los nombres de piloto que hay</div>
 </section>
 </li>
 <li>
 <section class="detail" id="modificarCampeon()">
 <h3>modificarCampeon</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">modificarCampeon</span>()</div>
-<div class="block">Este metodo sirve para modificar el nombre de un campeon</div>
+<div class="block">Este metodo sirve para modificar el nombre de un piloto</div>
 </section>
 </li>
 <li>
 <section class="detail" id="borrarCampeon()">
 <h3>borrarCampeon</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">borrarCampeon</span>()</div>
-<div class="block">Este metodo sirve para borrar un campeon</div>
+<div class="block">Este metodo sirve para borrar un piloto</div>
 </section>
 </li>
 <li>

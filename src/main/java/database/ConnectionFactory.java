@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * Esta clase sirve para hacer las conecciones
+ * Esta clase sirve para hacer las conexiones
  */
 public class ConnectionFactory {
     // init database constants

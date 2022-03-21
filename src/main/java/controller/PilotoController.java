@@ -1,7 +1,7 @@
 package controller;
 
-import model.Campeon;
-import model.Rol;
+import model.Piloto;
+import model.Escuderia;
 import view.Menu;
 
 import javax.persistence.EntityManager;
@@ -13,13 +13,13 @@ import java.sql.Connection;
 import java.util.*;
 
 /**
- * Esta clase sirve para controlar la tabla campeon situada en mi base de datos
+ * Esta clase sirve para controlar la tabla piloto situada en mi base de datos
  */
-public class CampeonController {
+public class PilotoController {
     private Connection connection;
     private EntityManagerFactory entityManagerFactory;
     Scanner sc;
-    List<Campeon> campeons ;
+    List<Piloto> pilotos;
     Menu menu = new Menu();
 
     /**
@@ -27,170 +27,170 @@ public class CampeonController {
      * @param connection recibe la coneccion hacia postgres
      * @param entityManagerFactory recibe el entityManagerFactory
      */
-    public CampeonController(Connection connection, EntityManagerFactory entityManagerFactory) {
+    public PilotoController(Connection connection, EntityManagerFactory entityManagerFactory) {
         this.connection = connection;
         this.entityManagerFactory = entityManagerFactory;
         this.sc = new Scanner(System.in);
-        campeons = new ArrayList<>();
+        pilotos = new ArrayList<>();
     }
 
     /**
      * Este metodo sirve para leer el fichero, lo mete en una lista y lo devuelve
      * @param file rebie la ruta del fichero
-     * @return devuelve una lista de Campeon
+     * @return devuelve una lista de Piloto
      * @throws IOException
      */
-    public List<Campeon> readCampeonFile(String file) throws IOException {
+    public List<Piloto> readPilotoFile(String file) throws IOException {
 
         BufferedReader br = new BufferedReader(new FileReader(file));
         String linea = "";
 
         while((linea = br.readLine()) != null){
             List<String> listToken = getTokenList(linea, "\"");
-            campeons.add(new Campeon(listToken.get(0),new Rol(listToken.get(2)),listToken.get(4)));
+            pilotos.add(new Piloto(listToken.get(0),listToken.get(2),new Escuderia(listToken.get(4)),listToken.get(6),listToken.get(8),listToken.get(10),listToken.get(12),listToken.get(14),listToken.get(16),listToken.get(18),listToken.get(20),listToken.get(22)));
         }
 
-        return campeons;
+        return pilotos;
     }
 
     /**
-     * Para añadir campeon
-     * @param campeon recibe un campeon y lo añade
+     * Para añadir piloto
+     * @param piloto recibe un piloto y lo añade
      */
-    public void addCampeon(Campeon campeon) {
+    public void addPiloto(Piloto piloto) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        em.merge(campeon);
+        em.merge(piloto);
         em.getTransaction().commit();
         em.close();
     }
 
     /**
-     * Este metodo sirve para mostrar campeones
+     * Este metodo sirve para mostrar pilotos
      */
-    public void showCampeon(){
+    public void showPiloto(){
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        List<Campeon> result = em.createQuery("from Campeon", Campeon.class).getResultList();
-        for (Campeon campeon : result) {
-            System.out.println(campeon.toString());
-        }
-        em.getTransaction().commit();
-        em.close();
-    }
-
-    /**
-     * Este metodo sirve para mostrar campeones por roles
-     */
-    public void showCampeonPorRol(){
-        String rol = menu.RolMenu(connection,entityManagerFactory).toUpperCase(Locale.ROOT);
-        String sql = "from Campeon where rol='" + rol + "'";
-
-        EntityManager em = entityManagerFactory.createEntityManager();
-        em.getTransaction().begin();
-        List<Campeon> result = em.createQuery(sql,Campeon.class).getResultList();
-        for (Campeon campeon : result) {
-            System.out.println(campeon.toString());
+        List<Piloto> result = em.createQuery("from Piloto", Piloto.class).getResultList();
+        for (Piloto piloto : result) {
+            System.out.println(piloto.toString());
         }
         em.getTransaction().commit();
         em.close();
     }
 
     /**
-     * Este metodo sirve para mostrar campeones con un texto especificado
+     * Este metodo sirve para mostrar pilotos por escuderias
      */
-    public void showCampeonCon(){
+    public void showPilotoPorEscuderia(){
+        String escuderia = menu.EscuderiaMenu(connection,entityManagerFactory).toUpperCase(Locale.ROOT);
+        String sql = "from Piloto where escuderia='" + escuderia + "'";
+
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        List<Piloto> result = em.createQuery(sql, Piloto.class).getResultList();
+        for (Piloto piloto : result) {
+            System.out.println(piloto.toString());
+        }
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    /**
+     * Este metodo sirve para mostrar pilotos con un texto especificado
+     */
+    public void showPilotoCon(){
         System.out.println("Escribe el texto a contener: ");
         String letra = sc.nextLine().toUpperCase(Locale.ROOT);
 
-        String sql = "from Campeon where nom like '%" + letra + "%'";
+        String sql = "from Piloto where nom like '%" + letra + "%'";
 
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        List<Campeon> result = em.createQuery(sql, Campeon.class).getResultList();
-        for (Campeon campeon : result) {
-            System.out.println(campeon.toString());
+        List<Piloto> result = em.createQuery(sql, Piloto.class).getResultList();
+        for (Piloto piloto : result) {
+            System.out.println(piloto.toString());
         }
         em.getTransaction().commit();
         em.close();
     }
 
     /**
-     * Este metodo sirve para mostrar campeones que empiezan por tal letra
+     * Este metodo sirve para mostrar pilotos que empiezan por tal letra
      */
-    public void showCampeonPor(){
+    public void showPilotoPor(){
         System.out.println("Escribe la letra de inicio: ");
         String letra = sc.nextLine().toUpperCase(Locale.ROOT);
 
-        String sql = "from Campeon where nom like '" + letra + "%'";
+        String sql = "from Piloto where nom like '" + letra + "%'";
 
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        List<Campeon> result = em.createQuery(sql, Campeon.class).getResultList();
-        for (Campeon campeon : result) {
-            System.out.println(campeon.toString());
+        List<Piloto> result = em.createQuery(sql, Piloto.class).getResultList();
+        for (Piloto piloto : result) {
+            System.out.println(piloto.toString());
         }
         em.getTransaction().commit();
         em.close();
     }
 
     /**
-     * Este metodo sirve para mostrar las id y los nombres de campeon que hay
+     * Este metodo sirve para mostrar las id y los nombres de pilotos que hay
      */
-    public void showCampeonNom(){
+    public void showPilotosNom(){
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        List<Campeon> result = em.createQuery("from Campeon order by id", Campeon.class).getResultList();
-        for (Campeon campeon : result) {
-            System.out.println(campeon.getId() + " " + campeon.getName());
+        List<Piloto> result = em.createQuery("from Piloto order by puntosTotales", Piloto.class).getResultList();
+        for (Piloto piloto : result) {
+            System.out.println(piloto.getNumero() + " " + piloto.getNombre());
         }
         em.getTransaction().commit();
         em.close();
     }
 
     /**
-     * Este metodo sirve para modificar el nombre de un campeon
+     * Este metodo sirve para modificar el nombre de un piloto
      */
-    public void modificarCampeon() {
-        int id = menu.NomMenu(connection,entityManagerFactory);
+    public void modificarPiloto() {
+        String numero = menu.NomMenu(connection,entityManagerFactory);
         System.out.println("Escribe el nuevo nombre: ");
-        String newNom = sc.nextLine().toUpperCase(Locale.ROOT);
+        String nuevoNombre = sc.nextLine().toUpperCase(Locale.ROOT);
 
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        Campeon campeon = (Campeon) em.find(Campeon.class, id);
-        campeon.setName(newNom);
-        em.merge(campeon);
+        Piloto piloto = (Piloto) em.find(Piloto.class, numero);
+        piloto.setNombre(nuevoNombre);
+        em.merge(piloto);
         em.getTransaction().commit();
         em.close();
     }
 
     /**
-     * Este metodo sirve para borrar un campeon
+     * Este metodo sirve para borrar un piloto
      */
-    public void borrarCampeon() {
-        int id = menu.NomMenu(connection,entityManagerFactory);
+    public void borrarPiloto() {
+        String numero = menu.NomMenu(connection,entityManagerFactory);
 
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        Campeon campeon = (Campeon) em.find(Campeon.class, id);
-        em.remove(campeon);
+        Piloto piloto = (Piloto) em.find(Piloto.class, numero);
+        em.remove(piloto);
         em.getTransaction().commit();
         em.close();
     }
 
     /**
-     * Este metodo sirve para borrar campeones por roles
+     * Este metodo sirve para borrar pilotos por escuderias
      */
-    public void borrarCampeonPorRol() {
-        String rol = menu.RolMenu(connection,entityManagerFactory).toUpperCase(Locale.ROOT);
-        String sql = "from Campeon where rol='" + rol + "'";
+    public void borrarPilotoPorEscuderia() {
+        String escuderias = menu.EscuderiaMenu(connection,entityManagerFactory).toUpperCase(Locale.ROOT);
+        String sql = "from Piloto where escuderia='" + escuderias + "'";
 
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        List<Campeon> result = em.createQuery(sql,Campeon.class).getResultList();
-        for (Campeon campeon : result) {
-            em.remove(campeon);
+        List<Piloto> result = em.createQuery(sql, Piloto.class).getResultList();
+        for (Piloto piloto : result) {
+            em.remove(piloto);
         }
         em.getTransaction().commit();
         em.close();

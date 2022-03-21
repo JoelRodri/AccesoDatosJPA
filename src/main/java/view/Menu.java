@@ -1,7 +1,7 @@
 package view;
 
-import controller.CampeonController;
-import controller.RolController;
+import controller.PilotoController;
+import controller.EscuderiaController;
 
 import javax.persistence.EntityManagerFactory;
 import java.io.BufferedReader;
@@ -17,7 +17,7 @@ public class Menu {
     private String opciones;
 
     /**
-     * Este es un constructor y llama a la clase padre suyo(nose quien es)
+     * Este es el constructor
      */
     public Menu() {
         super();
@@ -36,16 +36,16 @@ public class Menu {
 
             System.out.println("1. Rellenar Tablas");
             System.out.println("2. Mostrar los que sean ?");
-            System.out.println("3. Mostrar los campeones que tengan un ?");
-            System.out.println("4. Mostrar todos los campeon que empiezan por ?");
-            System.out.println("5. Modificar el nombre de un campeon");
-            System.out.println("6. Modificar el rols de los campeones que empiezan por ?");
-            System.out.println("7. Eliminar un campeon");
-            System.out.println("8. Eliminar campeones con el rol ?");
-            System.out.println("9. Añadir un rol");
-            System.out.println("10. Añadir un campeon");
-            System.out.println("11. Mostrar campeones");
-            System.out.println("12. Mostrar roles");
+            System.out.println("3. Mostrar los pilotos que tengan un X");
+            System.out.println("4. Mostrar todos los pilotos que empiezan por X");
+            System.out.println("5. Modificar el nombre de un piloto");
+            System.out.println("6. Modificar las escuderias de los pilotos que empiezan por X");
+            System.out.println("7. Eliminar un piloto");
+            System.out.println("8. Eliminar campeones con la escuderia X");
+            System.out.println("9. Añadir una escuderia");
+            System.out.println("10. Añadir un piloto");
+            System.out.println("11. Mostrar pilotos");
+            System.out.println("12. Mostrar escuderias");
             System.out.println("13. Exit");
             System.out.println("Esculli opció: ");
             try {
@@ -68,12 +68,12 @@ public class Menu {
      * @param c recibe la coneccion
      * @return devuelve el rol que elegiste
      */
-    public String RolMenu(Connection c, EntityManagerFactory entityManagerFactory){
-        RolController rolController = new RolController(c, entityManagerFactory);
+    public String EscuderiaMenu(Connection c, EntityManagerFactory entityManagerFactory){
+        EscuderiaController escuderiaController = new EscuderiaController(c, entityManagerFactory);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         for(;;){
-            rolController.showRols();
+            escuderiaController.showEscuderia();
             System.out.println("Elige el rol: ");
             try {
                 opciones = br.readLine();
@@ -85,24 +85,24 @@ public class Menu {
         }
     }
     /**
-     * Este metodo sirve para mostrar un menu de id y nombre de campeones
+     * Este metodo sirve para mostrar un menu de numeros y nombre de pilotos
      * @param c recibe la coneccion
      * @return devuelve el nombre que elegiste
      */
-    public int NomMenu(Connection c, EntityManagerFactory entityManagerFactory){
-        CampeonController campeonController = new CampeonController(c, entityManagerFactory);
+    public String NomMenu(Connection c, EntityManagerFactory entityManagerFactory){
+        PilotoController pilotoController = new PilotoController(c, entityManagerFactory);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("\n" + "Campeones: ");
+        System.out.println("\n" + "Pilotos: ");
         for(;;){
-            campeonController.showCampeonNom();
+            pilotoController.showPilotosNom();
             try {
                 option = Integer.parseInt(br.readLine());
             } catch (NumberFormatException | IOException e) {
                 System.out.println("valor no vàlid");
                 e.printStackTrace();
             }
-            return option;
+            return String.valueOf(option);
         }
     }
 }
