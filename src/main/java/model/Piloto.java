@@ -8,35 +8,35 @@ import java.io.Serializable;
  */
 @Entity
 @Access(AccessType.FIELD)
-@Table(name = "campeon")
+@Table(name = "piloto")
 public class Piloto implements Serializable {
     @Id
     @Column(name = "numero",length = 5)
     String numero;
-    @Column(name = "nombre",length = 20)
+    @Column(name = "nombre",length = 30)
     String nombre;
 
     @ManyToOne
     @JoinColumn(name = "escuderia")
     Escuderia escuderia;
 
-    @Column(name = "pais", length = 20)
+    @Column(name = "pais", length = 30)
     String pais;
-    @Column(name = "podiums", length = 20)
+    @Column(name = "podiums", length = 30)
     String podiums;
-    @Column(name = "puntosTotales", length = 20)
+    @Column(name = "puntosTotales", length = 30)
     String puntosTotales;
-    @Column(name = "gpCompletados", length = 20)
+    @Column(name = "gpCompletados", length = 30)
     String gpCompletados;
-    @Column(name = "titulosMundiales", length = 20)
+    @Column(name = "titulosMundiales", length = 30)
     String titulosMundiales;
-    @Column(name = "mejorPos", length = 20)
+    @Column(name = "mejorPos", length = 30)
     String mejorPos;
-    @Column(name = "mejorClas", length = 20)
+    @Column(name = "mejorClas", length = 30)
     String mejorClas;
-    @Column(name = "fechaNaci", length = 20)
+    @Column(name = "fechaNaci", length = 30)
     String fechaNaci;
-    @Column(name = "nacionalidad", length = 20)
+    @Column(name = "nacionalidad", length = 30)
     String nacionalidad;
 
 

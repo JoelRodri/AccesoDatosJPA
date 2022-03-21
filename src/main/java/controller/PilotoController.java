@@ -103,7 +103,7 @@ public class PilotoController {
         System.out.println("Escribe el texto a contener: ");
         String letra = sc.nextLine().toUpperCase(Locale.ROOT);
 
-        String sql = "from Piloto where nom like '%" + letra + "%'";
+        String sql = "from Piloto where nombre" + "like '%" + letra + "%'";
 
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
@@ -122,7 +122,7 @@ public class PilotoController {
         System.out.println("Escribe la letra de inicio: ");
         String letra = sc.nextLine().toUpperCase(Locale.ROOT);
 
-        String sql = "from Piloto where nom like '" + letra + "%'";
+        String sql = "from Piloto where nombre like '" + letra + "%'";
 
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
@@ -154,7 +154,7 @@ public class PilotoController {
     public void modificarPiloto() {
         String numero = menu.NomMenu(connection,entityManagerFactory);
         System.out.println("Escribe el nuevo nombre: ");
-        String nuevoNombre = sc.nextLine().toUpperCase(Locale.ROOT);
+        String nuevoNombre = sc.nextLine();
 
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();

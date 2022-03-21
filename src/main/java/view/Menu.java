@@ -36,7 +36,7 @@ public class Menu {
 
             System.out.println("1. Rellenar Tablas");
             System.out.println("2. Mostrar los que sean ?");
-            System.out.println("3. Mostrar los pilotos que tengan un X");
+            /*System.out.println("3. Mostrar los pilotos que tengan un X");*/
             System.out.println("4. Mostrar todos los pilotos que empiezan por X");
             System.out.println("5. Modificar el nombre de un piloto");
             System.out.println("6. Modificar las escuderias de los pilotos que empiezan por X");
@@ -74,7 +74,7 @@ public class Menu {
 
         for(;;){
             escuderiaController.showEscuderia();
-            System.out.println("Elige el rol: ");
+            System.out.println("Elige el escuderia: ");
             try {
                 opciones = br.readLine();
             } catch (NumberFormatException | IOException e) {

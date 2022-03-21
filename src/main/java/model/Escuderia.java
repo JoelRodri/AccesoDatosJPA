@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Table(name = "escuderia")
 public class Escuderia implements Serializable {
     @Id
-    @Column(name = "escuderia",length = 20)
+    @Column(name = "escuderia",length = 310)
     private String nombre;
 
     /**
